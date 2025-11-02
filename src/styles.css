@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+
+@plugin "daisyui" {
+  themes: cupcake, forest, synthwave, cyberpunk, retro, valentine;
+}
+
+/* Menu icon animation */
+.molde-menu-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.molde-menu-item-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: currentColor;
+  fill: transparent;
+  stroke-width: 1.5pt;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 400;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.molde-menu-item-icon.active svg {
+  animation: strok 1.5s reverse;
+}
+
+@keyframes strok {
+  100% {
+    stroke-dashoffset: 400;
+  }
+}
