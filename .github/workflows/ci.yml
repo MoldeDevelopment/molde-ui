@@ -8,7 +8,7 @@ name: CI
 #     branches: [main, develop]
 
 on:
-  workflow_dispatch:  # Permite execução manual apenas
+  workflow_dispatch: # Permite execução manual apenas
 
 jobs:
   test:

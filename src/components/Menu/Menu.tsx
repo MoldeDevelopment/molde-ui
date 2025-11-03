@@ -2,10 +2,7 @@ import { useState, useCallback } from 'react';
 import { MenuItem } from './MenuItem';
 import type { MenuProps, MenuItemType } from './types';
 
-const checkItemActive = (
-  item: MenuItemType,
-  currentActivePath: string,
-): boolean => {
+const checkItemActive = (item: MenuItemType, currentActivePath: string): boolean => {
   if (item.path === currentActivePath) return true;
   if (item.items) {
     return item.items.some(subItem => checkItemActive(subItem, currentActivePath));

@@ -15,6 +15,11 @@
 - 🌳 **Tree-shakeable**: Only import what you need
 - 🚀 **Framework agnostic**: Works with React and Next.js (RSC-safe)
 
+## Components
+
+- **Menu** - Vertical navigation menu with icons, subitems, and keyboard navigation
+- **FloatingMenu** - Floating menu with toast on hover, supports 12 positions (bottomCenter, bottomStart, bottomEnd, topCenter, topStart, topEnd, left, leftStart, leftEnd, right, rightStart, rightEnd)
+
 ## Installation
 
 ```bash
@@ -27,8 +32,11 @@ yarn add molde-ui
 
 ## Quick Start
 
+### Menu Component
+
 ```tsx
 import { Menu } from 'molde-ui';
+import 'molde-ui/styles';
 
 function App() {
   const menuItems = [
@@ -38,6 +46,29 @@ function App() {
   ];
 
   return <Menu items={menuItems} activePath="/home" onItemClick={path => console.log(path)} />;
+}
+```
+
+### FloatingMenu Component
+
+```tsx
+import { FloatingMenu } from 'molde-ui';
+import 'molde-ui/styles';
+
+function App() {
+  const menuItems = [
+    { label: 'Home', path: '/home', icon: <HomeIcon /> },
+    { label: 'Settings', path: '/settings', icon: <SettingsIcon /> },
+  ];
+
+  return (
+    <FloatingMenu
+      items={menuItems}
+      activePath="/home"
+      onItemClick={path => console.log(path)}
+      position="bottomCenter"
+    />
+  );
 }
 ```
 
@@ -58,7 +89,14 @@ Available themes: `light`, `dark`, `cupcake`, `forest`, `synthwave`, `cyberpunk`
 Full TypeScript support with type definitions included. All components and props are fully typed.
 
 ```tsx
-import { Menu, type MenuProps, type MenuItemType } from 'molde-ui';
+import {
+  Menu,
+  FloatingMenu,
+  type MenuProps,
+  type MenuItemType,
+  type FloatingMenuProps,
+  type FloatingMenuItemType,
+} from 'molde-ui';
 ```
 
 ## Accessibility
