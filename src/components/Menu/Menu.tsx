@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { MenuItem } from './MenuItem';
 import type { MenuProps, MenuItemType } from './types';
+import { useMoldeUIConfig } from '../../providers';
 
 const checkItemActive = (item: MenuItemType, currentActivePath: string): boolean => {
   if (item.path === currentActivePath) return true;
@@ -18,6 +19,7 @@ export const Menu = ({
   size = 'md',
   variant = 'default',
 }: MenuProps) => {
+  const { useDaisyUITheme } = useMoldeUIConfig();
   const sizeClass = size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-lg' : '';
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
 
@@ -85,9 +87,12 @@ export const Menu = ({
 
   const gapClass = variant === 'compact' ? 'gap-1' : 'gap-2';
 
+  // Se useDaisyUITheme estiver ativo, usa apenas classes DaisyUI
+  const baseClass = useDaisyUITheme ? 'flex flex-col' : 'molde-menu flex flex-col';
+
   return (
     <nav
-      className={`molde-menu flex flex-col ${gapClass} ${sizeClass} ${className}`}
+      className={`${baseClass} ${gapClass} ${sizeClass} ${className}`}
       role="menu"
       aria-label="Main navigation"
     >

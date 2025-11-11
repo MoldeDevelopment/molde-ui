@@ -2,7 +2,7 @@
   "name": "molde-ui",
   "author": "Molde Development",
   "license": "MIT",
-  "version": "0.1.1",
+  "version": "0.1.6",
   "description": "UI component library built with React, TypeScript, Tailwind CSS and DaisyUI",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
@@ -55,7 +55,7 @@
   "bugs": {
     "url": "https://github.com/MoldeDevelopment/molde-ui/issues"
   },
-  "homepage": "https://github.com/MoldeDevelopment/molde-ui#readme",
+  "homepage": "https://molde-ui.vercel.app/",
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"

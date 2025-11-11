@@ -1,4 +1,5 @@
 import { ReactNode, KeyboardEvent } from 'react';
+import { useMoldeUIConfig } from '../../providers';
 
 export interface MenuItemProps {
   label: string;
@@ -25,6 +26,7 @@ export const MenuItem = ({
   onToggleExpand,
   level = 0,
 }: MenuItemProps) => {
+  const { useDaisyUITheme } = useMoldeUIConfig();
   const handleClick = () => {
     if (isDisabled) return;
     if (hasSubitems && onToggleExpand) {
@@ -61,6 +63,12 @@ export const MenuItem = ({
   const paddingClass = level === 0 ? 'px-4' : 'px-4 pl-8';
   const sizeClass = 'py-3';
 
+  // Se useDaisyUITheme estiver ativo, usa apenas classes DaisyUI
+  const baseClass = useDaisyUITheme
+    ? `${paddingClass} ${sizeClass} flex items-center gap-3 transition-colors rounded-lg w-full text-left focus:outline-none`
+    : `molde-menu-item ${paddingClass} ${sizeClass} flex items-center gap-3 transition-colors rounded-lg w-full text-left focus:outline-none`;
+  const iconClass = useDaisyUITheme ? '' : `molde-menu-item-icon ${isActive ? 'active' : ''}`;
+
   return (
     <button
       onClick={handleClick}
@@ -70,13 +78,7 @@ export const MenuItem = ({
       aria-expanded={hasSubitems ? isExpanded : undefined}
       aria-current={isActive ? 'page' : undefined}
       className={`
-        molde-menu-item
-        ${paddingClass} ${sizeClass}
-        flex items-center gap-3
-        transition-colors
-        rounded-lg
-        w-full text-left
-        focus:outline-none focus:ring-2 focus:ring-base-content focus:ring-offset-2
+        ${baseClass}
         ${isActive ? 'text-primary bg-primary/10 hover:bg-primary/15' : 'text-base-content/70 hover:bg-base-300/50 hover:text-base-content'}
         ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
       `}
@@ -85,7 +87,7 @@ export const MenuItem = ({
     >
       <span className="flex items-center gap-3 w-full">
         {icon && (
-          <span className={`molde-menu-item-icon ${isActive ? 'active' : ''}`} aria-hidden="true">
+          <span className={iconClass} aria-hidden="true">
             {icon}
           </span>
         )}

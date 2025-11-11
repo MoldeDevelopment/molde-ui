@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react';
+import { useMoldeUIConfig } from '../../providers';
 
 interface FloatingMenuItemProps {
   label: string;
@@ -27,6 +28,7 @@ export const FloatingMenuItem = ({
   icon,
   position = 'bottomCenter',
 }: FloatingMenuItemProps) => {
+  const { useDaisyUITheme } = useMoldeUIConfig();
   const [showToast, setShowToast] = useState(false);
 
   const isVertical =
@@ -37,24 +39,27 @@ export const FloatingMenuItem = ({
     position === 'rightStart' ||
     position === 'rightEnd';
 
+  // Se useDaisyUITheme estiver ativo, usa apenas classes DaisyUI
+  const containerClass = useDaisyUITheme ? 'relative' : 'molde-floating-menu-item relative';
+  const buttonClass = useDaisyUITheme
+    ? 'relative flex items-center gap-2 cursor-pointer transition-all duration-300'
+    : 'molde-floating-menu-button relative flex items-center gap-2 cursor-pointer transition-all duration-300';
+  const iconClass = useDaisyUITheme ? '' : `molde-menu-item-icon ${isActive ? 'active' : ''}`;
+
   return (
-    <div className="molde-floating-menu-item relative">
+    <div className={containerClass}>
       <button
         onClick={onClick}
         onMouseEnter={() => !isActive && setShowToast(true)}
         onMouseLeave={() => setShowToast(false)}
         className={`
-          molde-floating-menu-button
-          relative
-          flex items-center gap-2
-          cursor-pointer
-          transition-all duration-300
+          ${buttonClass}
           ${isActive ? 'text-[#1877f3]' : 'text-base-content/70 hover:text-base-content'}
           ${isVertical ? 'flex-col' : ''}
         `}
       >
         {/* Ícone */}
-        {icon && <span className={`molde-menu-item-icon ${isActive ? 'active' : ''}`}>{icon}</span>}
+        {icon && <span className={iconClass}>{icon}</span>}
 
         {/* Nome aparece ao lado quando ativo e não é vertical */}
         {isActive && !isVertical && (
